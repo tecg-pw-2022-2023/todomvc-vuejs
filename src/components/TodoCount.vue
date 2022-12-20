@@ -1,10 +1,13 @@
 <template>
 <span class="todo-count">
-      <strong></strong>  left
+      <strong>{{count+' item'+(count>1?'s':'')}}</strong> left
     </span>
 </template>
+
 <script>
+
 export default {
-  name: 'todo-count'
+  name: 'todo-count',
+  props: ['count'],
 };
 </script>

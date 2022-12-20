@@ -1,20 +1,22 @@
 <template>
-  <input id="toggle-all" class="toggle-all" type="checkbox" @change="toggleAll">
+  <input id="toggle-all"
+         class="toggle-all"
+         type="checkbox"
+         v-model="allDone">
   <label for="toggle-all">Mark all as complete</label>
 </template>
-<script>
 
+<script>
 export default {
-  props: {
-    todoList : Array,
-  },
-  methods:{
-    toggleAll(){
-      for (const todo of this.todoList) {
-        todo.done  = !todo.done
-      }
+  data() {
+    return {
+      allDone: false,
     }
   },
-  name: 'toggle-all'
-};
+  watch: {
+    allDone(newValue) {
+      this.$emit('toggleAll', newValue)
+    },
+  }
+}
 </script>

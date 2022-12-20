@@ -1,27 +1,30 @@
 <template>
-  <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="inputTodo" @keyup.enter="addTodo">
+  <input class="new-todo"
+         autofocus
+         autocomplete="off"
+         placeholder="What needs to be done?"
+         v-model="newTodo"
+         @keyup.enter="addTodo">
 </template>
+
 <script>
 let id = 1
 export default {
   name: 'TodoInput',
-  emits: ['inputTodo'],
-  data () {
+  emits: ['newTodoAdded'],
+  data() {
     return {
-      inputTodo: '',
+      newTodo: '',
     }
   },
-
   methods: {
-
-    addTodo () {
-      console.log(this.inputTodo)
-      let todo = { id: id++, text: this.inputTodo, done: false };
-      this.$emit('inputTodo', todo)
-      this.inputTodo = ''
+    addTodo() {
+      if(this.newTodo.trim()){
+        let todo = {id: id++, title: this.newTodo, completed: false};
+        this.$emit('newTodoAdded', todo)
+        this.newTodo = ''
+      }
     }
-  },
+  }
 };
 </script>
-<style>
-</style>
